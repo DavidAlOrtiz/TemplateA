@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>#{titulo}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:form>
+        <h:commandButton value="Formulario" action="form.xhtml"></h:commandButton>
+    </h:form>
+    <h:body>
+        <h1><h:outputText value="#{titulo}" /></h1>
+        <div>Hola estoy aqui con el nuevo lado</div>
+        
+        
+        <h:dataTable  value="#{listProductos}" var="p">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Nombre" />
+                </f:facet>
+                <h:outputText value="#{p.nombre}"  />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="editar"></h:outputText>
+                </f:facet>
+                <h:form>
+                    <h:commandLink value="Editar" action="#{productoController.editar(p.id)}" />
+                </h:form>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="eliminar"></h:outputText>
+                </f:facet>
+                <h:form>
+                    <h:commandLink value="Eliminar" action="#{productoController.eliminar(p.id)}">
+                    </h:commandLink>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+        
+    </h:body>
+</html>

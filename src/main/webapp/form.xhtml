@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>#{titulo}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h1><h:outputText value="#{titulo}" /></h1>
+        <h:form>
+            <h:messages style="color:red"  />
+            <h:panelGrid>
+                <h:outputLabel value="Nombre" for="nombre" />
+                <h:inputText id="nombre" required="true" value="#{producto.nombre}" />
+                
+                <h:outputLabel value="Precio" for="precio" />
+                <h:inputText id="precio" required="true" value="#{producto.precio}" />
+                <h:outputLabel value="Sku" for="sku" />
+                <h:inputText id="sku" required="true" value="#{producto.sku}" />
+                
+                <h:outputLabel value="fecha" for="fecha" />
+                <h:inputText id="fecha" value="#{producto.fechaCreacion}" 
+                             converterMessage="Indique la fecha con yyyy-MM-dd" rendered="true" >
+                    <f:convertDateTime type="localDate"  pattern="yyyy-MM-dd" />
+                    <f:passThroughAttribute name="type" value="date" />
+                </h:inputText>
+                
+                <h:outputLabel value="Categoria" for="categoria"  />
+                <h:selectOneMenu id="categoria" value="#{producto.categoria}">
+                    <f:selectItem itemLabel="----Seleccionar Categoria--" value="#{null}" ></f:selectItem>
+                    <f:selectItems value="#{categoria}" var="cat" itemLabel="#{cat.nombre}"  itemValue="#{cat.nombre}"> </f:selectItems>
+                </h:selectOneMenu>
+                
+                <h:inputHidden value="#{producto.id}" />
+                <h:commandButton value="Crear" action="#{productoController.crear}" />
+            </h:panelGrid>
+        </h:form>
+        
+    </h:body>
+</html>
